@@ -1,0 +1,18 @@
+nb_main_homepage:
+    path:     /
+    defaults: { _controller: NBMainBundle:Main:index }
+nb_main_listing:
+    path:     /listing
+    defaults: { _controller: NBMainBundle:Main:listing }
+nb_main_travel_details:
+    path:     /details-du-voyage
+    defaults: { _controller: NBMainBundle:Main:details }
+
+
+nb_main_customer_info:
+    path:     /information-client
+    defaults: { _controller: NBMainBundle:Main:custInfo }
+
+nb_main_vitepay_callback:
+    path:     /vitepay/callback/{id}
+    defaults: { _controller: NBMainBundle:Main:callback }

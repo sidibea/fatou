@@ -1,0 +1,15 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: ngnb
+    database_user: root
+    database_password: sorofing
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    admin_link: "http://localhost/nextBusAdmin/web/"
+    mailer_user: null
+    vitePay_api_key: Nc6nS3I1pbYojQ
+    vitePay_api_secret: 18d8250938e773b44e8e014d99baa420
+    mailer_password: null
+    secret: 39c975ea222e7a36442d79403e28617b5f3e8d92

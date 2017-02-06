@@ -1,0 +1,276 @@
+{% extends '::base.html.twig' %}
+
+{% block breadcumb %}
+    <div class="page-title-container">
+        <div class="container">
+            <div class="page-title pull-left">
+                <h2 class="entry-title">{{ travel.route.title }}</h2>
+            </div>
+            <ul class="breadcrumbs pull-right">
+                <li><a href="">Acceuil</a></li>
+                <li class="active">Résultat des recherches</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section id="content">
+        <div class="container flight-detail-page">
+            <div class="row">
+                <div id="main" class="col-md-9">
+                    <div class="tab-container style1 box" id="flight-main-content">
+                        <ul class="tabs">
+                            <li class="active"><a data-toggle="tab" href="#photo-tab">photo</a></li>
+                            <li class="pull-right"><a class="button btn-small yellow-bg white-color" href="#">AVANT DE VOYAGER</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="photo-tab" class="tab-pane fade in active">
+                                <div class="featured-image image-container">
+                                    <img style="width: 100%; height: 530px;" src="{{ absolute_url(asset('logo/'~travel.bus.photo)) }}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="flight-features" class="tab-container">
+                        <ul class="tabs">
+                            <li class="active"><a href="#flight-details" data-toggle="tab">Détails du voyage</a></li>
+                            <li><a href="#flight-fare-rules" data-toggle="tab">Conditions Générales</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="flight-details">
+                                <div class="intro table-wrapper full-width hidden-table-sm box">
+                                    <div class="col-md-4 table-cell travelo-box">
+                                        <dl class="term-description">
+                                            <dt>Compagnie:</dt><dd> {{ travel.bus.company.nom }}</dd>
+                                            <dt>Type de voyage:</dt><dd>{% if travel.route.type == true %} National {% else %} International {% endif %} FCFA</dd>
+                                            <dt>Type de tarif:</dt><dd>Remboursable</dd>
+                                            <dt>Siège &amp; Baggage:</dt><dd>Extra Charge </dd>
+                                            <dt>Facilité à board:</dt><dd>Disponible</dd>
+                                            <dt>Tarif de base:</dt><dd>{{ travel.price|number_format(0, '.', ',')}} FCFA</dd>
+                                            <dt>Reduction:</dt><dd>{{ promo.montant|number_format(0, '.', ',') }} FCFA</dd>
+                                            <dt>prix total :</dt><dd>{{ (travel.price - promo.montant )|number_format(0, '.', ',')  }} FCFA</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-8 table-cell">
+                                        <div class="detailed-features booking-details">
+                                            <div class="travelo-box">
+                                                <a href="#" class="button btn-mini yellow pull-right">1 STOP</a>
+                                                <h4 class="box-title">{{ travel.route.source.nom }} à {{ travel.route.destination.nom }} </h4>
+                                            </div>
+                                            <div class="table-wrapper flights">
+                                                <div class="table-row first-flight">
+                                                    <div class="table-cell logo">
+                                                        <img src="http://placehold.it/140x30" alt="">
+                                                        <label>AI-635 Economy</label>
+                                                    </div>
+                                                    <div class="table-cell timing-detail">
+                                                        <div class="timing">
+                                                            <div class="check-in">
+                                                                <label>Take off</label>
+                                                                <span>13 Nov 2013, 7:50 am</span>
+                                                            </div>
+                                                            <div class="duration text-center">
+                                                                <i class="soap-icon-clock"></i>
+                                                                <span>1h 30m</span>
+                                                            </div>
+                                                            <div class="check-out">
+                                                                <label>landing</label>
+                                                                <span>13 Nov 2013, 9:20 Am</span>
+                                                            </div>
+                                                        </div>
+                                                        <label class="layover">Layover : 3h 50m</label>
+                                                    </div>
+                                                </div>
+                                                <div class="table-row second-flight">
+                                                    <div class="table-cell logo">
+                                                        <img src="http://placehold.it/140x30" alt="">
+                                                        <label>AI-635 Economy</label>
+                                                    </div>
+                                                    <div class="table-cell timing-detail">
+                                                        <div class="timing">
+                                                            <div class="check-in">
+                                                                <label>Take off</label>
+                                                                <span>13 Nov 2013, 7:50 am</span>
+                                                            </div>
+                                                            <div class="duration text-center">
+                                                                <i class="soap-icon-clock"></i>
+                                                                <span>8h 20m</span>
+                                                            </div>
+                                                            <div class="check-out">
+                                                                <label>landing</label>
+                                                                <span>13 Nov 2013, 9:20 Am</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="long-description">
+                                    <h2>A Propos de {{ travel.bus.company.nom }}</h2>
+                                    <p>
+                                        {{ travel.bus.company.description }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="flight-fare-rules">
+                                <h2>Règles de votre voyage</h2>
+                                <div class="topics">
+                                    <ul class="check-square clearfix">
+                                        <li class="col-sm-6 col-md-4"><a href="#">Règles et Politiques</a></li>
+                                        <li class="col-sm-6 col-md-4"><a href="#">Modification du voyage</a></li>
+                                        <li class="col-sm-6 col-md-4"><a href="#">Remboursement</a></li>
+                                        <li class="col-sm-6 col-md-4"><a href="#">Pénalités de voyage</a></li>
+                                        <li class="col-sm-6 col-md-4 active"><a href="#">Annulation du voyage</a></li>
+                                        <li class="col-sm-6 col-md-4"><a href="#">Conditions d'utilisations</a></li>
+                                    </ul>
+                                </div>
+                                <p>Maecenas vitae turpis condimentum metus tincidunt semper bibendum ut orci. Donec eget accumsan est. Duis laoreet sagittis elit et vehicula. Cras viverra posuere condimentum. Donec urna arcu, venenatis quis augue sit amet, mattis gravida nunc. Integer faucibus, tortor a tristique adipiscing, arcu metus luctus libero, nec vulputate risus elit id nibh.</p>
+                                <div class="toggle-container">
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" href="#question1" data-toggle="collapse">Flight cancellation charges</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse" id="question1">
+                                            <div class="panel-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" href="#question2" data-toggle="collapse">WAmendment in higher class charges</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse" id="question2">
+                                            <div class="panel-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="" href="#question3" data-toggle="collapse">Amendment in same class charges</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse in" id="question3">
+                                            <div class="panel-content">
+                                                <p>Sed a justo enim. Vivamus volutpat ipsum ultrices augue porta lacinia. Proin in elementum enim. <span class="skin-color">Duis suscipit justo</span> non purus consequat molestie. Etiam pharetra ipsum sagittis sollicitudin ultricies. Praesent luctus, diam ut tempus aliquam, diam ante euismod risus, euismod viverra quam quam eget turpis. Nam <span class="skin-color">tristique congue</span> arcu, id bibendum diam. Ut hendrerit, leo a pellentesque porttitor, purus arcu tristique erat, in faucibus elit leo in turpis vitae luctus enim, a mollis nulla.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" href="#question4" data-toggle="collapse">Rebooking/cancellation charges</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse" id="question4">
+                                            <div class="panel-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" href="#question5" data-toggle="collapse">Cancellation through the customer support</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse" id="question5">
+                                            <div class="panel-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" href="#question6" data-toggle="collapse">Do we accept cancellations through email?</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse" id="question6">
+                                            <div class="panel-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel style1 arrow-right">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" href="#question7" data-toggle="collapse">What is the minimum day limit of cancellation?</a>
+                                        </h4>
+                                        <div class="panel-collapse collapse" id="question7">
+                                            <div class="panel-content">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar col-md-3">
+                    <article class="detailed-logo">
+                        <figure>
+                            <img src="{{ admin_link~"logo/"~travel.bus.company.logo }}" alt="">
+                        </figure>
+                        <div class="details">
+                            <h2 class="box-title">
+                                {{ travel.route.title }} </h2>
+                                <span class="price clearfix">
+                                    <small class="pull-left">tarif/personne</small>
+                                    <span class="pull-right">
+                                        {% if promo.montant > 0 %}
+                                            <s class="warning ">{{ travel.price|number_format(0, '.', ',')  }} FCFA</s> <br>
+                                            {{ promo.montant|number_format(0, '.', ',')  }} FCFA
+                                        {% else %}
+                                            {{ travel.price|number_format(0, '.', ',')  }} FCFA
+                                        {% endif %}
+                                    </span>
+                                </span>
+
+                            <div class="duration">
+                                <i class="soap-icon-clock"></i>
+                                <dl>
+                                    <dt class="skin-color">Durée Total:</dt>
+                                    <dd>4 Heures 40 minutes</dd>
+                                </dl>
+                            </div>
+
+                            <p class="description">{{ travel.description| raw }}</p>
+                            <a href="{{ path('nb_main_customer_info', {'travel': travel.id, 'goingDate': dateJ| date('d-m-Y')}) }}" class="button green full-width uppercase btn-medium">Acheter Maintenant</a>
+                        </div>
+                    </article>
+                    <div class="travelo-box contact-box">
+                        <h4>Besoin d'aide ?</h4>
+                        <p>Nous serons plus que ravi de vous aider. Notre équipe clientèle est à votre service 24/7 pour vous aider ou vous accompagner.</p>
+                        <address class="contact-details">
+                            <span class="contact-phone"><i class="soap-icon-phone"></i> 44-27-27-18-HELLO</span>
+                            <br>
+                            <a class="contact-email" href="#">aide@next-bus.net</a>
+                        </address>
+                    </div>
+                    <div class="travelo-box book-with-us-box">
+                        <h4>Pourquoi acheter avec nous ?</h4>
+                        <ul>
+                            <li>
+                                <i class="soap-icon-hotel-1 circle"></i>
+                                <h5 class="title"><a href="#">+3,000 points de ventes</a></h5>
+                                <p>Avec nextBus acheter vos billets dans les agences CANAL+, Orange Money et les agences de voyage</p>
+                            </li>
+                            <li><br>
+                                <i class="soap-icon-savings circle"></i>
+                                <h5 class="title"><a href="#">Réductions &amp; Economie</a></h5>
+                                <p>Avec nextBus bénéficiez des meilleurs prix promotionnels sur vos billets.</p>
+                            </li>
+                            <li>
+                                <i class="soap-icon-support circle"></i>
+                                <h5 class="title"><a href="#">Excellent Service client</a></h5>
+                                <p>nextBus vous offre le meilleur service client, qui reste à votre écoute pour aider à voyager dans le confort et sans tracas.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
